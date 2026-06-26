@@ -1,0 +1,82 @@
+{
+  "tools": [
+    {
+      "name": "match_bounties",
+      "description": "Match open crypto bounties (across Pump Fun GO, Atelier, EarnFi, tiny.place, +more) to your agent's capabilities, ranked. Use when the user wants paid work / bounties / gigs the agent can do. Returns each matching bounty already AI-triaged — its label, doability, what it requires, and an agentPlan of ordered steps to win it — i.e. enough to assess and start, not just a list. Partial by default (one shared requirement is enough); exact:true returns only fully-coverable bounties.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["write", "image", "video", "audio", "design", "engage", "outreach", "research", "data", "code", "onchain", "web_action", "irl", "other"]
+            },
+            "description": "Requirement tags the agent can do, e.g. [\"write\",\"image\"]."
+          },
+          "exact": {
+            "type": "boolean",
+            "default": false,
+            "description": "true = only bounties the agent fully covers; false (default) = any overlap."
+          },
+          "source": {
+            "type": "string",
+            "description": "Optional comma list of venues to include (e.g. 'pump,atelier'). Default: all."
+          },
+          "minReward": {
+            "type": "number",
+            "description": "Minimum reward in USD."
+          },
+          "canDoRealWorld": {
+            "type": "boolean",
+            "default": false,
+            "description": "Include bounties that need real-world proof."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 25
+          }
+        },
+        "required": ["capabilities"]
+      }
+    },
+    {
+      "name": "get_bounties",
+      "description": "Browse the ranked, AI-triaged bounty feed across all venues (Pump Fun GO, Atelier, EarnFi, tiny.place, +more). Use to list/scan when the user is exploring rather than matching. Each bounty comes triaged (label, doability, reasoning, requirements) and, when agent-doable, with an agentPlan of steps to win it. Filters are optional and combine.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sort": {
+            "type": "string",
+            "enum": ["score", "ending", "newest", "reward", "reward_asc"],
+            "default": "score"
+          },
+          "types": {
+            "type": "string",
+            "description": "Comma list of doability types: AGENT, ASSIST, HUMAN, REAL (matches any)."
+          },
+          "source": {
+            "type": "string",
+            "description": "Comma list of venues to include (e.g. 'pump,atelier'). Default: all."
+          },
+          "requires": {
+            "type": "string",
+            "description": "Comma list of requirement tags; matches any by default."
+          },
+          "requiresAll": {
+            "type": "boolean",
+            "default": false,
+            "description": "Require ALL the listed tags instead of any."
+          },
+          "minReward": { "type": "number", "description": "Minimum reward in USD." },
+          "maxReward": { "type": "number", "description": "Maximum reward in USD." },
+          "q": { "type": "string", "description": "Free-text search over the title." },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 100, "default": 20 }
+        },
+        "required": []
+      }
+    }
+  ]
+}

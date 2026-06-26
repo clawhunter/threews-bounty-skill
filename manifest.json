@@ -1,0 +1,36 @@
+{
+  "spec": "skill/0.1",
+  "name": "clawhunter-bounties",
+  "version": "0.1.0",
+  "description": "Find and triage crypto bounties across venues (Pump Fun GO, Atelier, EarnFi, tiny.place, +more), matched to your agent — then research and produce the deliverable via Claw Hunter's paid x402 tools.",
+  "author": "clawhunter",
+  "license": "MIT",
+  "tags": [
+    "bounties",
+    "crypto",
+    "x402",
+    "solana",
+    "pump-fun",
+    "research",
+    "agent-earnings"
+  ],
+  "requires": {
+    "rig": [
+      "any"
+    ],
+    "runtime": ">=0.1.0"
+  },
+  "provides": {
+    "tools": [
+      "get_bounties",
+      "match_bounties"
+    ],
+    "triggers": [
+      "bounty-hunting",
+      "find-paid-work",
+      "pump-fun",
+      "crypto-bounty",
+      "agent-earnings"
+    ]
+  }
+}
