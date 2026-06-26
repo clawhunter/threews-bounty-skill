@@ -32,6 +32,11 @@ editor → **Skills** → **Add Skill**, or add it to the agent manifest:
 
 The runtime appends `manifest.json`, `SKILL.md`, `tools.json`, and `handlers.js`.
 
+> **Trust policy — read this if nothing happens after installing.** This bundle
+> ships a `handlers.js`, so it's a *code skill*: an agent on the default
+> `owned-only` trust **silently skips it**. Set the agent's skill trust to
+> `whitelist` (this publisher) or `any` to run it.
+
 ## Files
 
 | File | Purpose |
@@ -40,11 +45,3 @@ The runtime appends `manifest.json`, `SKILL.md`, `tools.json`, and `handlers.js`
 | `SKILL.md` | instructions injected into the agent's system prompt |
 | `tools.json` | tool schemas (`match_bounties`, `get_bounties`) |
 | `handlers.js` | sandboxed Web Worker handlers — call Claw Hunter's free API via `ctx.fetch` |
-
-## Notes
-
-- The handlers call only the **free** endpoints. CORS is required (the bundle runs
-  a browser `fetch` from three.ws's worker); `clawhunter.fun` serves
-  `Access-Control-Allow-Origin: *` on the public free endpoints.
-- `handlers.js` is a **code skill** → it runs under the agent's skill trust policy.
-  Installers may need `trust: "whitelist"` (this publisher) or `"any"` to run it.
